@@ -1,5 +1,5 @@
 {
-  "name": "quill-markdown-shortcuts",
+  "name": "@pulsedotso/quill-markdown-shortcuts",
   "version": "0.0.10",
   "description": "Quill.js module that converts markdown to rich text formatting while typing. ",
   "main": "dist/markdownShortcuts.js",
@@ -19,5 +19,16 @@
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "webpack": "^3.10.0"
-  }
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wooolfgang/quill-markdown-shortcuts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wooolfgang/quill-markdown-shortcuts/issues"
+  },
+  "homepage": "https://github.com/wooolfgang/quill-markdown-shortcuts#readme"
 }
