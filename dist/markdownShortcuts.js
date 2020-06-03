@@ -129,6 +129,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+var Block = _quill2.default.import('blots/block');
+
 _quill2.default.register('formats/horizontal', _hr2.default);
 
 var MarkdownShortcuts = function () {
@@ -337,6 +339,8 @@ var MarkdownShortcuts = function () {
           } else if (delta.ops[i].insert === '\n') {
             _this.onEnter();
           }
+        } else if (delta.ops[i].hasOwnProperty('delete') && source === 'user') {
+          _this.onDelete();
         }
       }
     });
@@ -436,6 +440,38 @@ var MarkdownShortcuts = function () {
           }
         }
       }
+    }
+  }, {
+    key: 'onDelete',
+    value: function onDelete() {
+      var range = this.quill.getSelection();
+      var format = this.quill.getFormat(range);
+
+      if (format.blockquote || format.code || format['code-block']) {
+        if (this.isLastBrElement(range) || this.isEmptyLine(range)) {
+          this.quill.removeFormat(range.index, range.length);
+        }
+      }
+    }
+  }, {
+    key: 'isLastBrElement',
+    value: function isLastBrElement(range) {
+      var _quill$scroll$descend = this.quill.scroll.descendant(Block, range.index),
+          _quill$scroll$descend2 = _slicedToArray(_quill$scroll$descend, 1),
+          block = _quill$scroll$descend2[0];
+
+      var isBrElement = block != null && block.domNode.firstChild instanceof HTMLBRElement;
+      return isBrElement;
+    }
+  }, {
+    key: 'isEmptyLine',
+    value: function isEmptyLine(range) {
+      var _quill$getLine5 = this.quill.getLine(range.index),
+          _quill$getLine6 = _slicedToArray(_quill$getLine5, 1),
+          line = _quill$getLine6[0];
+
+      var isEmpty = line.children.head.text.trim() === "";
+      return isEmpty;
     }
   }]);
 
