@@ -299,6 +299,11 @@ class MarkdownShortcuts {
 
   onDelete () {
     const range = this.quill.getSelection();
+    
+    if (!range) {
+      return
+    }
+
     const format = this.quill.getFormat(range)
 
     if (format.blockquote || format.code || format['code-block']) {

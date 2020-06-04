@@ -15554,6 +15554,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           key: 'onDelete',
           value: function onDelete() {
             var range = this.quill.getSelection();
+
+            if (!range) {
+              return;
+            }
+
             var format = this.quill.getFormat(range);
 
             if (format.blockquote || format.code || format['code-block']) {
